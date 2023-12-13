@@ -28,14 +28,24 @@ if __name__ == "__main__":
         base_url="https://demo.deployradiant.com/mistral-embedding/openai/",
         api_key="notNeeded",
     )
-    add_embedding(openai_client=mistral_openai_client, collection=collection, embedding_field_name="mistral_embedding")
+    # add_embedding(openai_client=mistral_openai_client, collection=collection, embedding_field_name="mistral_embedding")
     # Query the pdf
-    # query = "What is Goldreich-Sridhar scaling?"
-    # result = query_results(
-    #     openai_client=openai_client,
-    #     collection=collection,
-    #     field=embedding_field_name,
-    #     index=embedding_field_name + "_index",
-    #     query=query,
-    # )
-    # print(result)
+    query = "What is Goldreich-Sridhar scaling?"
+    result = query_results(
+        openai_client=openai_client,
+        collection=collection,
+        field=embedding_field_name,
+        index=embedding_field_name + "_index",
+        query=query,
+    )
+    print(result)
+
+    query = "What is Goldreich-Sridhar scaling?"
+    result = query_results(
+        openai_client=mistral_openai_client,
+        collection=collection,
+        field="mistral_embedding",
+        index="vector_index",
+        query=query,
+    )
+    print(result)
