@@ -4,7 +4,9 @@ from pymongo.collection import Collection
 from utils import generate_embedding
 
 
-def query_results(openai_client: OpenAI, collection: Collection, field: str, index: str, query: str):
+def query_results(
+    openai_client: OpenAI, collection: Collection, field: str, index: str, query: str
+):
     results = collection.aggregate(
         [
             {
