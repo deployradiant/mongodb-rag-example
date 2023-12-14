@@ -1,7 +1,7 @@
 # MongoDB RAG example using Atlas VectorSearch and Radiant
 This is a simple example of using MongoDB Atlas VectorSearch and Radiant to build a RAG (Retrieval-Augmented Generation) model. 
 
-A more thorough writeup of this example can be found [here](https://medium.com/@jakob.maria.frick/using-radiant-with-mongodb-atlas-to-effectively-scale-rag-workflowsa-step-by-step-guide-f9c8897fde0c).
+A more thorough writeup of this example can be found [here](https://radiantai.com/blog/rag-mongo-step-by-step).
 
 ## Setup
 
