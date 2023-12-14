@@ -29,7 +29,12 @@ if __name__ == "__main__":
 
     if args.ingest:
         # Ingest the pdf
-        ingest(openai_client=openai_client, pdf_file=pdf_path, collection=collection, embedding_field_name=embedding_field_name)
+        ingest(
+            openai_client=openai_client,
+            pdf_file=pdf_path,
+            collection=collection,
+            embedding_field_name=embedding_field_name,
+        )
         # The following line has been commented out because it needs a newer version of MongoDB Cluster.
         # create_search_index(collection=collection, embedding_field_name=embedding_field_name, index=embedding_field_name + "_index", dimensions=1536)
 
@@ -44,4 +49,3 @@ if __name__ == "__main__":
             query=query,
         )
         print(result)
-
