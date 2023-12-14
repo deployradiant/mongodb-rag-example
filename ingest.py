@@ -37,7 +37,7 @@ def create_search_index(collection, embedding_field_name, index, dimensions):
                     "fields": {
                         embedding_field_name: {
                             "dimensions": dimensions,
-                            "similarity": "dotProduct",
+                            "similarity": "cosine",
                             "type": "knnVector",
                         }
                     },
