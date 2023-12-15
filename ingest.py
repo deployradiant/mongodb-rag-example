@@ -6,6 +6,19 @@ from utils import generate_embedding
 
 
 def ingest(openai_client, pdf_file, collection, embedding_field_name):
+    ingest_data(
+        openai_client=openai_client,
+        pdf_file=pdf_file,
+        collection=collection,
+        embedding_field_name=embedding_field_name,
+    )
+
+    # The following line has been commented out because it needs a newer version of MongoDB Cluster.
+    # num_dimensions = len(generate_embedding(openai_client=openai_client, text="test"))
+    # create_search_index(collection=collection, embedding_field_name=embedding_field_name, index=embedding_field_name + "_index", dimensions=num_dimensions)
+
+
+def ingest_data(openai_client, pdf_file, collection, embedding_field_name):
     documents = []
     with open(pdf_file, "rb") as f:
         pdf_reader = PyPDF2.PdfReader(f)
