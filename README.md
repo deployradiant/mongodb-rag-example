@@ -23,7 +23,7 @@ The `ingest` function in [ingest.py](./ingest.py) will ingest a pdf file into th
 You can ingest a pdf file by running the following command:
 
 ```
-python main.py --ingest
+python main.py --ingest --pdf /path/to/file.pdf
 ```
 
 
