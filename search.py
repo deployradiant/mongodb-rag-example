@@ -3,10 +3,16 @@ from pymongo.collection import Collection
 
 from utils import generate_embedding
 
+SYSTEM_PROMPT = {
+    "role": "system",
+    "content": "You are an expert plasma physicist. You help synthesize the provided context to answer the user questions in a helpful manner. If you don't know the answer, say you don't know.",
+}
+
 
 def query_results(
-    openai_client: OpenAI, collection: Collection, field: str, index: str, query: str
+    openai_client: OpenAI, collection: Collection, field: str, index: str, messages: list[dict[str,str]]
 ):
+    query = messages[-1]["content"]
     results = collection.aggregate(
         [
             {
@@ -33,11 +39,7 @@ def query_results(
 
     response = openai_client.chat.completions.create(
         model="notNeeded",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are an expert plasma physicist. You help synthesize the provided context to answer the user questions in a helpful manner. If you don't know the answer, say you don't know.",
-            },
+        messages=[SYSTEM_PROMPT] + messages[:-1] + [
             {"role": "user", "content": user_message_with_context},
         ],
         n=1,

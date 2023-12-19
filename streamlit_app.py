@@ -40,7 +40,7 @@ if query := st.chat_input("Ask a question about plasma turbulence"):
         collection=collection,
         field=embedding_field_name,
         index=embedding_field_name + "_index",
-        query=query,
+        messages=st.session_state.messages,
     )
 
     # Display assistant response in chat message container
