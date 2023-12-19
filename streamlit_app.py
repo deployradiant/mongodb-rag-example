@@ -19,8 +19,22 @@ db = mongo_client.plasmaPhysics
 collection = db.pdfs
 embedding_field_name = "openai_text_embedding_ada_002"
 
-query = st.text_input("Enter search query:")
-if query:
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+if query := st.chat_input("Ask a question about plasma turbulence"):
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(query)
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": query})
+
     result = query_results(
         openai_client=openai_client,
         collection=collection,
@@ -29,10 +43,11 @@ if query:
         query=query,
     )
 
-    if result:
-        st.write(result)
-    else:
-        st.write("No results found")
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(result)
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": result})
 
 st.sidebar.header("About")
 st.sidebar.markdown(
